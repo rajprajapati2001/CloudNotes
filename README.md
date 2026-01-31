@@ -3,7 +3,7 @@
 
 **CloudNotes** is a modern note-taking web application built with **React.js + Vite** and **Supabase** for backend services. It allows users to create, edit, archive, pin, and organize notes with a drag-and-drop interface. The app also features AI-powered text enhancement for better note-taking.
 
-🔗 **Live Website**: [URL#](URL#)
+🔗 **Live Website**: [https://cloudnotes-rajprajapati2001s-projects.vercel.app/](https://cloudnotes-rajprajapati2001s-projects.vercel.app/)
 
 ---
 
@@ -108,4 +108,5 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 **Raj Prajapati**
+
 Developed on `30th January 2026`/`Friday`.
