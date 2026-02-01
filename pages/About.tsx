@@ -36,7 +36,7 @@ const About: React.FC = () => {
       <div className="p-10 rounded-[3rem] bg-indigo-600 text-white flex flex-col md:flex-row items-center gap-10 shadow-2xl shadow-indigo-500/40">
         <div className="relative">
           <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/30 shadow-lg">
-            <img src="../assets/me_picture_logo_1000x1000.jpg" alt="Developer" className="w-full h-full object-cover" />
+            <img src="https://raw.githubusercontent.com/rajprajapati2001/CloudNotes/refs/heads/main/assets/me_picture_logo_1000x1000.jpg" alt="Raj" className="w-full h-full object-cover" />
           </div>
           <div className="absolute -bottom-2 -right-2 bg-white text-indigo-600 p-2 rounded-full shadow-lg">
             <Sparkles size={20} />
