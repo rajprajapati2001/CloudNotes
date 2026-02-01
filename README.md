@@ -81,7 +81,7 @@ Get your local environment running in seconds by following these steps:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/cloudnotes.git
+git clone https://github.com/rajprajapati2001/CloudNotes.git
 cd cloudnotes
 ```
 ### 2. Configure Environment Variables
@@ -110,3 +110,4 @@ This project is open-source and available under the [MIT License](LICENSE).
 **Raj Prajapati**
 
 Developed on `30th January 2026`/`Friday`.
+
