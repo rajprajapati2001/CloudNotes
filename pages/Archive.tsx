@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Archive as ArchiveIcon, Info } from 'lucide-react';
 import { Note } from '../types';
@@ -26,7 +25,7 @@ const Archive: React.FC<ArchiveProps> = ({ notes, onUpdateNote, onDeleteNote, on
   };
 
   return (
-    <div className="animate-slide-up">
+    <div className="animate-in fade-in slide-in-from-right-4 duration-500">
       <header className="mb-10 flex items-center gap-4">
         <div className="p-3 bg-amber-100 text-amber-600 rounded-2xl">
           <ArchiveIcon size={28} />
@@ -45,7 +44,7 @@ const Archive: React.FC<ArchiveProps> = ({ notes, onUpdateNote, onDeleteNote, on
           <p className="text-slate-500 text-lg">Your archive is empty.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 gap-2">
           {notes.map(note => (
             <NoteCard 
               key={note.id} 

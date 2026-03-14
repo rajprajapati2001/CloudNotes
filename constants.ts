@@ -1,6 +1,7 @@
+import React from 'react';
 
 export const NOTE_COLORS = [
-    // LIGHT & SUBTLE (Great for backgrounds)
+  // LIGHT & SUBTLE (Great for backgrounds)
   { name: 'Default', value: 'bg-white' },
   { name: 'Soft Blue', value: 'bg-blue-50' },
   { name: 'Soft Green', value: 'bg-emerald-50' },

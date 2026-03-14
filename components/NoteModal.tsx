@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { X, Sparkles, Check, Palette } from 'lucide-react';
 import { Note } from '../types';
@@ -20,16 +19,15 @@ const NoteModal: React.FC<NoteModalProps> = ({ note, isOpen, onClose, onSave }) 
   const [showColorPicker, setShowColorPicker] = useState(false);
 
   useEffect(() => {
-    if (note && isOpen) {
+    if (note) {
       setTitle(note.title);
       setContent(note.content);
       setColor(note.color);
-    } else if (isOpen) {
+    } else {
       setTitle('');
       setContent('');
       setColor(NOTE_COLORS[0].value);
     }
-    setShowColorPicker(false);
   }, [note, isOpen]);
 
   const handleSave = () => {
@@ -59,9 +57,9 @@ const NoteModal: React.FC<NoteModalProps> = ({ note, isOpen, onClose, onSave }) 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 backdrop-blur-sm bg-slate-900/40 animate-fade-in">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 backdrop-blur-sm bg-slate-900/40 animate-in fade-in duration-200">
       <div 
-        className={`w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col transition-all duration-300 ${color} border border-white/20 animate-zoom-in`}
+        className={`w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col transition-all duration-300 ${color} border border-white/20`}
       >
         <div className="flex items-center justify-between p-4 border-b border-black/5">
           <h2 className="text-xl font-bold text-slate-800">
@@ -87,7 +85,7 @@ const NoteModal: React.FC<NoteModalProps> = ({ note, isOpen, onClose, onSave }) 
             placeholder="Start typing your note..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full min-h-[16rem] bg-transparent resize-none placeholder-slate-400 focus:outline-none text-slate-700 leading-relaxed text-lg"
+            className="w-full h-64 bg-transparent resize-none placeholder-slate-400 focus:outline-none text-slate-700 leading-relaxed text-lg"
           />
         </div>
 
@@ -103,7 +101,7 @@ const NoteModal: React.FC<NoteModalProps> = ({ note, isOpen, onClose, onSave }) 
               </button>
               
               {showColorPicker && (
-                <div className="absolute bottom-full left-0 mb-2 p-2 bg-white rounded-2xl shadow-xl border border-slate-200 flex-col gap-2 animate-slide-up max-h-80 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <div className="absolute bottom-full left-0 mb-2 p-2 bg-white rounded-2xl shadow-xl border border-slate-200 flex gap-2 overflow-x-auto max-w-[260px] sm:max-w-[360px] animate-in slide-in-from-bottom-2">
                   {NOTE_COLORS.map((c) => (
                     <button
                       key={c.value}
@@ -111,7 +109,7 @@ const NoteModal: React.FC<NoteModalProps> = ({ note, isOpen, onClose, onSave }) 
                         setColor(c.value);
                         setShowColorPicker(false);
                       }}
-                      className={`w-8 h-8 rounded-full border-2 transition-transform hover:scale-110 ${c.value} ${
+                      className={`w-8 h-8 shrink-0 rounded-full border-2 transition-transform hover:scale-110 ${c.value} ${
                         color === c.value ? 'border-indigo-500' : 'border-transparent'
                       }`}
                     />
@@ -125,7 +123,7 @@ const NoteModal: React.FC<NoteModalProps> = ({ note, isOpen, onClose, onSave }) 
               disabled={isEnhancing}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-50 text-indigo-600 font-medium hover:bg-indigo-100 transition-all ${isEnhancing ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              <Sparkles size={18} className={isEnhancing ? 'animate-pulse text-indigo-400' : ''} />
+              <Sparkles size={18} className={isEnhancing ? 'animate-pulse' : ''} />
               {isEnhancing ? 'AI Thinking...' : 'AI Enhance'}
             </button>
           </div>

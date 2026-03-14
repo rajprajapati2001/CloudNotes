@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Pin, Archive, Trash2, Edit3, Clock, GripVertical } from 'lucide-react';
 import { Note } from '../types';
@@ -26,8 +25,7 @@ const NoteCard: React.FC<NoteCardProps> = ({
   onDragOver,
   onDrop
 }) => {
-  // Fix: Property 'timestamp' does not exist on type 'Note'. Use updated_at or created_at instead.
-  const dateStr = new Date(note.updated_at || note.created_at || Date.now()).toLocaleString(undefined, {
+  const dateStr = new Date(note.timestamp).toLocaleString(undefined, {
     month: 'short',
     day: 'numeric',
     hour: '2-digit',
@@ -42,7 +40,7 @@ const NoteCard: React.FC<NoteCardProps> = ({
       onDrop={onDrop}
       className={`group relative p-5 rounded-2xl border transition-all duration-200 hover:shadow-xl hover:-translate-y-1 cursor-default ${note.color} ${
         note.color.includes('bg-white') ? 'border-slate-200' : 'border-transparent'
-      } animate-zoom-in`}
+      }`}
     >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2 flex-grow">
@@ -57,7 +55,7 @@ const NoteCard: React.FC<NoteCardProps> = ({
         </div>
         {!isArchive && onTogglePin && (
           <button 
-            onClick={(e) => { e.stopPropagation(); onTogglePin(note.id); }}
+            onClick={() => onTogglePin(note.id)}
             className={`p-1.5 rounded-full transition-colors ${
               note.pinned 
                 ? 'text-indigo-600 bg-indigo-50' 
@@ -81,21 +79,21 @@ const NoteCard: React.FC<NoteCardProps> = ({
         
         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <button 
-            onClick={(e) => { e.stopPropagation(); onEdit(note); }}
+            onClick={() => onEdit(note)}
             className="p-1.5 rounded-lg text-slate-600 hover:bg-black/5"
             title="Edit"
           >
             <Edit3 size={16} />
           </button>
           <button 
-            onClick={(e) => { e.stopPropagation(); onToggleArchive(note.id); }}
+            onClick={() => onToggleArchive(note.id)}
             className="p-1.5 rounded-lg text-slate-600 hover:bg-black/5"
             title={isArchive ? "Restore" : "Archive"}
           >
             <Archive size={16} />
           </button>
           <button 
-            onClick={(e) => { e.stopPropagation(); onDelete(note.id); }}
+            onClick={() => onDelete(note.id)}
             className="p-1.5 rounded-lg text-red-500 hover:bg-red-50"
             title="Delete Permanently"
           >

@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Plus, Search, User as UserIcon } from 'lucide-react';
 import { User, Note } from '../types';
@@ -77,8 +76,8 @@ const Dashboard: React.FC<DashboardProps> = ({
   };
 
   return (
-    <div className="relative pb-24 animate-slide-up">
-      <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div className="relative pb-24 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between md:gap-6 gap-2">
         <div>
           <h1 className="text-4xl font-extrabold text-slate-900">
             Welcome, <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">{user.username}</span>
@@ -106,7 +105,7 @@ const Dashboard: React.FC<DashboardProps> = ({
             <span className="whitespace-nowrap">Pinned Notes</span>
             <span className="h-px bg-slate-200 w-full"></span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 gap-2">
             {pinnedNotes.map((note, idx) => (
               <NoteCard 
                 key={note.id} 
@@ -136,19 +135,16 @@ const Dashboard: React.FC<DashboardProps> = ({
             <div className="w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-6">
                <Plus className="text-slate-400" size={32} />
             </div>
-            <p className="text-slate-500 text-lg mb-6">No notes found matching your search.</p>
+            <p className="text-slate-500 text-lg mb-6">No notes found in your private section.</p>
             <button 
-              onClick={() => {
-                setEditingNote(null);
-                setIsModalOpen(true);
-              }}
+              onClick={() => setIsModalOpen(true)}
               className="bg-indigo-600 text-white px-8 py-3 rounded-2xl font-bold shadow-lg shadow-indigo-500/30 hover:bg-indigo-700 transition-all active:scale-95"
             >
               Add Your First Note
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 gap-2">
             {otherNotes.map((note, idx) => (
               <NoteCard 
                 key={note.id} 
@@ -166,7 +162,7 @@ const Dashboard: React.FC<DashboardProps> = ({
         )}
       </section>
 
-      {/* Floating Add Button */}
+      {/* Floating Add Button (Moved to Bottom Right) */}
       <button 
         onClick={() => {
           setEditingNote(null);

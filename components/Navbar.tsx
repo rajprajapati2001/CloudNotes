@@ -1,15 +1,13 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LogOut, Info, Archive, Home, Cloud, CheckCircle2 } from 'lucide-react';
+import { LogOut, Info, Archive, Home, Cloud } from 'lucide-react';
 import { APP_NAME } from '../constants';
 
 interface NavbarProps {
   onLogout: () => void;
-  username?: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onLogout, username }) => {
+const Navbar: React.FC<NavbarProps> = ({ onLogout }) => {
   const location = useLocation();
 
   const navItems = [
@@ -24,15 +22,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLogout, username }) => {
         <div className="bg-indigo-600 p-2 rounded-lg text-white shadow-lg shadow-indigo-500/30">
           <Cloud size={24} />
         </div>
-        <div className="flex flex-col">
-          <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent hidden sm:inline leading-none">
-            {APP_NAME}
-          </span>
-          <div className="flex items-center gap-1 mt-0.5">
-             <CheckCircle2 size={10} className="text-green-500" />
-             <span className="text-[10px] text-slate-400 font-medium uppercase tracking-tighter">Synced</span>
-          </div>
-        </div>
+        <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent hidden sm:inline">
+          {APP_NAME}
+        </span>
       </div>
 
       <div className="flex items-center gap-1 sm:gap-4">
@@ -55,11 +47,10 @@ const Navbar: React.FC<NavbarProps> = ({ onLogout, username }) => {
 
         <button
           onClick={onLogout}
-          className="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center gap-2"
+          className="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors"
           title="Logout"
         >
           <LogOut size={20} />
-          <span className="hidden md:inline font-medium">Logout</span>
         </button>
       </div>
     </nav>

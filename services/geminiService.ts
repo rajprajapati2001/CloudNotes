@@ -1,22 +1,48 @@
+const tidyWhitespace = (text: string): string => {
+  return text
+    .replace(/\r\n/g, '\n')
+    .replace(/\t/g, ' ')
+    .replace(/[ ]{2,}/g, ' ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+};
 
-import { GoogleGenAI } from "@google/genai";
+const sentenceCase = (line: string): string => {
+  const cleaned = line.trim();
+  if (!cleaned) return '';
 
-export async function enhanceNoteContent(content: string): Promise<string> {
-  try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: `You are a helpful writing assistant. Please take the following note content and improve its clarity, grammar, and organization while keeping its original meaning. Format it neatly. Note: ${content}`,
-      config: {
-        systemInstruction: "You are an expert editor. Enhance notes for clarity and impact.",
-        temperature: 0.7,
-      },
-    });
+  return cleaned
+    .split(/([.!?]\s+)/)
+    .map(part => {
+      if (!part || /^[.!?]\s*$/.test(part)) return part;
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    })
+    .join('');
+};
 
-    return response.text || content;
-  } catch (error) {
-    console.error("Gemini AI Enhancement failed:", error);
-    alert("AI enhancement failed. Please check your internet connection or try again later.");
-    return content;
-  }
-}
+const normalizeBullet = (line: string): string => {
+  const bulletMatch = line.match(/^\s*[-*•]\s*(.+)$/);
+  if (!bulletMatch) return sentenceCase(line);
+
+  const bulletContent = sentenceCase(bulletMatch[1]);
+  return `- ${bulletContent}`;
+};
+
+const enhanceLocally = (content: string): string => {
+  const normalized = tidyWhitespace(content);
+  if (!normalized) return content;
+
+  const lines = normalized.split('\n').map(line => line.trimEnd());
+
+  const enhancedLines = lines.map(line => {
+    if (!line.trim()) return '';
+    return normalizeBullet(line);
+  });
+
+  return enhancedLines.join('\n').trim();
+};
+
+export const enhanceNoteContent = async (content: string): Promise<string> => {
+  // Fully free enhancement: runs locally in-browser with no paid API.
+  return Promise.resolve(enhanceLocally(content));
+};
